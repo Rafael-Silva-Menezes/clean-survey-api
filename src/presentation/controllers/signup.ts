@@ -4,7 +4,12 @@ import { HttpRequest, HttResponse } from '../http/http';
 
 export class SignUpController {
   handle(httpRequest: HttpRequest): HttResponse {
-    const requiredFileds = ['name', 'email', 'password'];
+    const requiredFileds = [
+      'name',
+      'email',
+      'password',
+      'passwordConfirmation',
+    ];
     for (const field of requiredFileds) {
       if (!httpRequest?.body[field]) {
         return badRequest(new MissingParamError(field));
