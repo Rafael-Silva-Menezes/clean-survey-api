@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:rafaelsilvamenezes1997/Node-clean.git",
   "author": "<rafasilva320.rs@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.2.8"
+  }
 }
