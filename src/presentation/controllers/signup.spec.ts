@@ -3,7 +3,7 @@ import {
   InvalidParamError,
   InternalServerError,
 } from '../errors';
-import { EmailValidator } from '../http';
+import { EmailValidator } from '../protocols';
 import { SignUpController } from './signup';
 
 interface SutTypes {
