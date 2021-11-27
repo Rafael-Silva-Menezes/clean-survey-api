@@ -3,8 +3,8 @@ import {
   InvalidParamError,
   InternalServerError,
 } from '../errors';
-import { SignUpController } from './signup';
 import { EmailValidator } from '../protocols';
+import { SignUpController } from './signup';
 
 interface SutTypes {
   sut: SignUpController;
