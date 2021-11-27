@@ -1,4 +1,3 @@
-import { InternalServerError } from '../errors/internal-server-error';
 import { InvalidParamError } from '../errors/invalid-param-error';
 import { MissingParamError } from '../errors/missing-param-error';
 import { badRequest, serverError } from '../helpers/http-helper';
@@ -34,7 +33,7 @@ export class SignUpController implements Controller {
         return badRequest(new InvalidParamError('email'));
       }
     } catch (error) {
-      return serverError(new InternalServerError());
+      return serverError();
     }
   }
 }
