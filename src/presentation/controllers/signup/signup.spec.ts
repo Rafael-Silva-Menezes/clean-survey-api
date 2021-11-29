@@ -26,7 +26,7 @@ const makeEmailValidator = (): EmailValidator => {
   return new EmailValidatorStub();
 };
 
-const makedAddAccount = (): AddAccount => {
+const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async add(account: AddAccountModel): Promise<AccountModel> {
       const fakeAccount = {
@@ -44,7 +44,7 @@ const makedAddAccount = (): AddAccount => {
 
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator();
-  const addAccountStub = makedAddAccount();
+  const addAccountStub = makeAddAccount();
   const sut = new SignUpController(emailValidatorStub, addAccountStub);
   return {
     sut,
@@ -147,7 +147,7 @@ describe('SignUp Controller', () => {
 
   test('Should call EmailValidator with correct email', async () => {
     const { sut, emailValidatorStub } = makeSut();
-    const isValidspy = jest.spyOn(emailValidatorStub, 'isValid');
+    const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid');
     const httpRequest = {
       body: {
         name: 'any_name',
@@ -157,7 +157,7 @@ describe('SignUp Controller', () => {
       },
     };
     await sut.handle(httpRequest);
-    expect(isValidspy).toHaveBeenCalledWith('any_email@mail.com');
+    expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com');
   });
 
   test('Should return 500 if EmailValidator throws', async () => {

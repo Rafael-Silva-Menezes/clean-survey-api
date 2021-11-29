@@ -19,13 +19,13 @@ export class SignUpController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttResponse> {
     try {
-      const requiredFileds: string[] = [
+      const requiredFields: string[] = [
         'name',
         'email',
         'password',
         'passwordConfirmation',
       ];
-      for (const field of requiredFileds) {
+      for (const field of requiredFields) {
         if (!httpRequest?.body[field]) {
           return badRequest(new MissingParamError(field));
         }
