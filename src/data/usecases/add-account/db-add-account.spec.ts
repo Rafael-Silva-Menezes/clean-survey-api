@@ -1,4 +1,4 @@
-import { DbAddAcount } from './db-add-account';
+import { DbAddAccount } from './db-add-account';
 import {
   AccountModel,
   AddAccountModel,
@@ -7,7 +7,7 @@ import {
 } from './db-add-account-protocols';
 
 interface SutTypes {
-  sut: DbAddAcount;
+  sut: DbAddAccount;
   encrypterStub: Encrypter;
   addAccountRepositoryStub: AddAccountRepository;
 }
@@ -41,7 +41,7 @@ const makeAccountRepository = (): AddAccountRepository => {
 const makeSut = (): SutTypes => {
   const encrypterStub = makeEncrypter();
   const addAccountRepositoryStub = makeAccountRepository();
-  const sut = new DbAddAcount(encrypterStub, addAccountRepositoryStub);
+  const sut = new DbAddAccount(encrypterStub, addAccountRepositoryStub);
 
   return {
     encrypterStub,

@@ -6,7 +6,7 @@ import {
   AddAccountRepository,
 } from './db-add-account-protocols';
 
-export class DbAddAcount implements AddAccount {
+export class DbAddAccount implements AddAccount {
   private readonly encrypter: Encrypter;
   private readonly addAccountRepository: AddAccountRepository;
 
