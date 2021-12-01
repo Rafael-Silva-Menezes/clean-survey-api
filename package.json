@@ -12,6 +12,7 @@
     "@types/jest": "^27.0.3",
     "@types/mongodb": "^3.3.14",
     "@types/node": "^16.11.10",
+    "@types/supertest": "^2.0.11",
     "@types/validator": "^13.7.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
@@ -30,10 +31,12 @@
     "lint-staged": "10.2.2",
     "prettier": "^2.4.1",
     "sucrase": "^3.20.3",
+    "supertest": "^6.1.6",
     "ts-jest": "^27.0.7",
     "typescript": "^4.5.2"
   },
   "scripts": {
+    "start": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
     "test:verbose": "jest --passWithNoTests --runInBand ",
     "test:unit": "yarn test --watch -c jest-unit-config.js",
