@@ -1,19 +1,16 @@
 {
   "env": {
     "es2021": true,
-    "node": true,
-    "jest": true
+    "node": true
   },
   "extends": [
-    "standard",
+    "airbnb-base",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project":"./tsconfig.json",
-    "ecmaVersion": 2021,
+    "ecmaVersion": 13,
     "sourceType": "module"
   },
   "plugins": [
@@ -23,9 +20,16 @@
   ],
   "rules": {
     "prettier/prettier": "error",
-    "@typescript-eslint/no-explicit-any":"off",
-    "@typescript-eslint/no-unused-vars":"off",
     "no-use-before-define": "off",
+    "no-console": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "class-methods-use-this": "off",
+    "no-promise-executor-return":"off",
+    "no-restricted-syntax":["off"],
+    "max-classes-per-file": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-use-before-define": [
       "error"
     ],
