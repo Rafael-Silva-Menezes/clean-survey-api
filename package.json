@@ -47,6 +47,8 @@
     "express": "^4.17.2",
     "fast-glob": "^3.2.9",
     "mongodb": "^3.5.1",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "mongoose": "^5.13.0"
+
   }
 }

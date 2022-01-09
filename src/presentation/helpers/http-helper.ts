@@ -1,17 +1,17 @@
 import { InternalServerError } from '../errors';
-import { HttResponse } from '../protocols';
+import { HttpResponse } from '../protocols';
 
-export const badRequest = (error: Error): HttResponse => ({
+export const badRequest = (error: Error): HttpResponse => ({
   statusCode: 400,
   body: error,
 });
 
-export const serverError = (error: Error): HttResponse => ({
+export const serverError = (error: Error): HttpResponse => ({
   statusCode: 500,
   body: new InternalServerError(error.stack),
 });
 
-export const ok = (data: any): HttResponse => ({
+export const ok = (data: any): HttpResponse => ({
   statusCode: 200,
   body: data,
 });
