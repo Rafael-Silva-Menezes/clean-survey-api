@@ -1,9 +1,20 @@
+import { LogErrorRepository } from '../../data/protocols/log-error-repository';
+import { serverError } from '../../presentation/helpers';
 import {
   Controller,
   HttpRequest,
   HttpResponse,
 } from '../../presentation/protocols';
 import { LogControllerDecorator } from './log';
+
+const makeLogErrorRepositoryStub = (): LogErrorRepository => {
+  class LogErrorRepositoryStub implements LogErrorRepository {
+    async log(stack: string): Promise<void> {
+      return new Promise(resolve => resolve());
+    }
+  }
+  return new LogErrorRepositoryStub();
+};
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
@@ -20,17 +31,23 @@ const makeController = (): Controller => {
 };
 
 interface SutTypes {
+  logErrrorRepositoryStub: LogErrorRepository;
   controllerStub: Controller;
   sut: LogControllerDecorator;
 }
 
 const makeSut = (): SutTypes => {
+  const logErrrorRepositoryStub = makeLogErrorRepositoryStub();
   const controllerStub = makeController();
-  const sut = new LogControllerDecorator(controllerStub);
+  const sut = new LogControllerDecorator(
+    controllerStub,
+    logErrrorRepositoryStub,
+  );
 
   return {
     sut,
     controllerStub,
+    logErrrorRepositoryStub,
   };
 };
 
@@ -64,14 +81,19 @@ describe('LogController Decorator', () => {
     });
   });
 
-  test('Should return the same result of the controller', async () => {
-    const { sut } = makeSut();
+  test('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
+    const { sut, controllerStub, logErrrorRepositoryStub } = makeSut();
 
-    const httpResponse = await sut.handle(httpRequest);
+    const fakeError = new Error();
+    fakeError.stack = 'any_stack';
+    const error = serverError(fakeError);
 
-    expect(httpResponse).toEqual({
-      statusCode: 200,
-      body: httpRequest.body,
-    });
+    const logSpy = jest.spyOn(logErrrorRepositoryStub, 'log');
+    jest
+      .spyOn(controllerStub, 'handle')
+      .mockReturnValueOnce(new Promise(resolve => resolve(error)));
+
+    await sut.handle(httpRequest);
+    expect(logSpy).toHaveBeenCalledWith('any_stack');
   });
 });
