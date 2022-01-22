@@ -63,4 +63,15 @@ describe('LogController Decorator', () => {
       body: httpRequest.body,
     });
   });
+
+  test('Should return the same result of the controller', async () => {
+    const { sut } = makeSut();
+
+    const httpResponse = await sut.handle(httpRequest);
+
+    expect(httpResponse).toEqual({
+      statusCode: 200,
+      body: httpRequest.body,
+    });
+  });
 });

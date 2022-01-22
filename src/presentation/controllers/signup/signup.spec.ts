@@ -1,7 +1,7 @@
 import {
   MissingParamError,
   InvalidParamError,
-  InternalServerError,
+  ServerError,
 } from '../../errors';
 import {
   EmailValidator,
@@ -172,7 +172,7 @@ describe('SignUp Controller', () => {
     const httpResponse = await sut.handle(makeFakeRequest());
 
     expect(httpResponse.statusCode).toBe(500);
-    expect(httpResponse.body).toEqual(new InternalServerError(null));
+    expect(httpResponse.body).toEqual(new ServerError(null));
   });
 
   test('Should call AddAcount with correct values', async () => {
@@ -197,7 +197,7 @@ describe('SignUp Controller', () => {
     const httpResponse = await sut.handle(makeFakeRequest());
 
     expect(httpResponse.statusCode).toBe(500);
-    expect(httpResponse.body).toEqual(new InternalServerError(null));
+    expect(httpResponse.body).toEqual(new ServerError(null));
   });
 
   test('Should return 200 if valid data is provided', async () => {
