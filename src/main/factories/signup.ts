@@ -16,7 +16,6 @@ export const makeSignUpController = (): Controller => {
   const emailValidator = new EmailValidatorAdapter();
 
   const signUpController = new SignUpController(
-    emailValidator,
     addAccount,
     makeSignUpValidation(),
   );
