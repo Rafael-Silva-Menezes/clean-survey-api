@@ -1,5 +1,16 @@
-import { MissingParamError, InvalidParamError, ServerError } from '../../errors';
-import { EmailValidator, AddAccount, AddAccountModel, AccountModel, HttpRequest, Validation } from './signup-protocols';
+import {
+  MissingParamError,
+  InvalidParamError,
+  ServerError,
+} from '../../errors';
+import {
+  EmailValidator,
+  AddAccount,
+  AddAccountModel,
+  AccountModel,
+  HttpRequest,
+  Validation,
+} from './signup-protocols';
 import { SignUpController } from './signup';
 import { badRequest, ok, serverError } from '../../helpers';
 
@@ -57,7 +68,11 @@ const makeSut = (): SutTypes => {
   const validationStub = makeValidationStub();
   const emailValidatorStub = makeEmailValidator();
   const addAccountStub = makeAddAccount();
-  const sut = new SignUpController(emailValidatorStub, addAccountStub, validationStub);
+  const sut = new SignUpController(
+    emailValidatorStub,
+    addAccountStub,
+    validationStub,
+  );
   return {
     sut,
     emailValidatorStub,
@@ -79,7 +94,9 @@ describe('SignUp Controller', () => {
     };
     const httpResponse = await sut.handle(httpRequest);
 
-    expect(httpResponse).toEqual(badRequest(new InvalidParamError('passwordConfirmation')));
+    expect(httpResponse).toEqual(
+      badRequest(new InvalidParamError('passwordConfirmation')),
+    );
   });
 
   test('Should return 400 if an invalid email is provided', async () => {
@@ -154,9 +171,13 @@ describe('SignUp Controller', () => {
   test('Should return 400 if Validation returns an error', async () => {
     const { sut, validationStub } = makeSut();
 
-    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'));
+    jest
+      .spyOn(validationStub, 'validate')
+      .mockReturnValueOnce(new MissingParamError('any_field'));
 
     const httpResponse = await sut.handle(makeFakeRequest());
-    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')));
+    expect(httpResponse).toEqual(
+      badRequest(new MissingParamError('any_field')),
+    );
   });
 });

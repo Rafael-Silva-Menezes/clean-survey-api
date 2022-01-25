@@ -1,5 +1,10 @@
 import { DbAddAccount } from './db-add-account';
-import { AccountModel, AddAccountModel, Encrypter, AddAccountRepository } from './db-add-account-protocols';
+import {
+  AccountModel,
+  AddAccountModel,
+  Encrypter,
+  AddAccountRepository,
+} from './db-add-account-protocols';
 
 interface SutTypes {
   sut: DbAddAccount;
@@ -84,9 +89,11 @@ describe('DbAddAccount Usecase', () => {
 
   test('Should throw if AddAccountRepository throws', async () => {
     const { sut, addAccountRepositoryStub } = makeSut();
-    jest.spyOn(addAccountRepositoryStub, 'add').mockImplementationOnce(async () => {
-      return new Promise((resolve, reject) => reject(new Error()));
-    });
+    jest
+      .spyOn(addAccountRepositoryStub, 'add')
+      .mockImplementationOnce(async () => {
+        return new Promise((resolve, reject) => reject(new Error()));
+      });
 
     const promise = sut.add(makeFakeAccountData());
     await expect(promise).rejects.toThrow();
