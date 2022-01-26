@@ -1,4 +1,4 @@
-import { Validation } from '..';
+import { Validation } from './validation';
 import { MissingParamError } from '../../errors';
 import { ValidationComposite } from './validation-composite';
 

@@ -5,7 +5,7 @@ import {
   AddAccount,
   Validation,
 } from './signup-protocols';
-import { badRequest, serverError, ok } from '../../helpers/http-helper';
+import { badRequest, serverError, ok } from '../../helpers/http';
 
 export class SignUpController implements Controller {
   private readonly validation: Validation;
@@ -24,7 +24,7 @@ export class SignUpController implements Controller {
         return badRequest(error);
       }
 
-      const { name, email, password, passwordConfirmation } = httpRequest.body;
+      const { name, email, password } = httpRequest.body;
 
       const account = await this.addAccount.add({
         name,

@@ -7,7 +7,7 @@ import {
   Validation,
 } from './signup-protocols';
 import { SignUpController } from './signup';
-import { badRequest, ok, serverError } from '../../helpers';
+import { badRequest, ok, serverError } from '../../helpers/http';
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
@@ -34,7 +34,7 @@ const makeAddAccount = (): AddAccount => {
   return new AddAccountStub();
 };
 
-const makeValidationStub = (): Validation => {
+const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
     validate(input: any): Error {
       return null;
@@ -50,7 +50,7 @@ interface SutTypes {
 }
 
 const makeSut = (): SutTypes => {
-  const validationStub = makeValidationStub();
+  const validationStub = makeValidation();
   const addAccountStub = makeAddAccount();
   const sut = new SignUpController(addAccountStub, validationStub);
   return {
