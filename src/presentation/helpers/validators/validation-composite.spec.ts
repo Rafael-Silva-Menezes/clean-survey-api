@@ -47,4 +47,12 @@ describe('Validation Composite', () => {
 
     expect(errror).toEqual(new Error());
   });
+
+  test('Should not return if validation succeds', () => {
+    const { sut } = makeSut();
+
+    const errror = sut.validate({ field: 'any_value' });
+
+    expect(errror).toBeFalsy();
+  });
 });
